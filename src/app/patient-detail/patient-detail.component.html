@@ -1,0 +1,26 @@
+<!-- <mat-card>
+  <mat-card-title>Patient Details</mat-card-title>
+  <p>Name: {{ patient.name }}</p>
+  <p>Address: {{ patient.address }}</p>
+  <p>Phone: {{ patient.phoneNumber }}</p>
+  <p>Email: {{ patient.email }}</p>
+  <p>DOB: {{ patient.birthDate }}</p>
+  <button mat-raised-button color="primary" (click)="goBack()">Back</button>
+
+</mat-card>
+<mat-card >
+  <app-recommendations [patientId]="patientId"></app-recommendations>
+</mat-card> -->
+<mat-card *ngIf="patient">
+  <mat-card-title>Patient Details</mat-card-title>
+  <p><strong>Name:</strong> {{ patient?.name }}</p>
+  <p><strong>Address:</strong> {{ patient?.address }}</p>
+  <p><strong>Phone:</strong> {{ patient?.phoneNumber }}</p>
+  <p><strong>Email:</strong> {{ patient?.email }}</p>
+  <p><strong>DOB:</strong> {{ patient?.birthDate }}</p>
+  <button mat-raised-button color="primary" (click)="goBack()">Back</button>
+</mat-card>
+
+<mat-card *ngIf="patient">
+  <app-recommendations [patientId]="patientId" [recommendations]="patient.recommendations"></app-recommendations>
+</mat-card>

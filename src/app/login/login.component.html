@@ -1,0 +1,37 @@
+<div class="auth-container">
+    <mat-card class="auth-card">
+      <div class="auth-header">
+        <h2>Welcome Back</h2>
+        <p>Login to your account</p>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email"  [(ngModel)]="email" type="email" placeholder="Enter your email" />
+          <mat-error *ngIf="loginForm.get('email')?.invalid">Please enter a valid email</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            formControlName="password"
+            type="password"
+            placeholder="Enter your password"
+            [(ngModel)]="password"
+          />
+          <mat-error *ngIf="loginForm.get('password')?.invalid">
+            Password must be at least 6 characters long
+          </mat-error>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" class="full-width btn-primary" type="submit">
+          Login
+        </button>
+      </form>
+      <div class="auth-footer">
+        <p>Don’t have an account? <a routerLink="/register">Register</a></p>
+      </div>
+    </mat-card>
+  </div>
+  

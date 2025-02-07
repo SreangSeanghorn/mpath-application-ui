@@ -1,0 +1,38 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Sidebar -->
+  <mat-sidenav
+    #sidenav
+    class="sidenav"
+    fixedInViewport
+    [mode]="isSmallScreen ? 'over' : 'side'"
+    [opened]="!isSmallScreen"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/patients" routerLinkActive="active-link">
+        Patients
+      </a>
+      <a mat-list-item routerLink="/about" routerLinkActive="active-link">
+        About
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="main-toolbar">
+      <button
+        mat-icon-button
+        (click)="sidenav.toggle()"
+        *ngIf="isSmallScreen"
+        aria-label="Toggle sidenav"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Healthcare Management</span>
+    </mat-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

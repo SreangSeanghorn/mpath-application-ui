@@ -1,0 +1,30 @@
+.sidenav-container {
+  height: 100vh;
+  background-color: #f8f8f8;
+  border-right: 1px solid #e0e0e0;
+}
+
+.sidenav {
+  width: 250px;
+
+}
+
+.mat-toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.main-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.content {
+  padding: 16px;
+}
+
+.active-link {
+  font-weight: bold;
+  color: #1976d2;
+}
