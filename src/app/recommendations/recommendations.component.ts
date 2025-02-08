@@ -28,22 +28,19 @@ export class RecommendationsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log("Recommendations received:", this.recommendations);
+
   } 
 
-  // Load recommendations for the patient
   loadRecommendations(patientId: string): void {
    
   }
 
-  // Mark a recommendation as completed
   markAsCompleted(recommendation: any): void {
     if (!recommendation.isCompleted) {
       this.patientService.markRecommendationAsCompleted(recommendation.id)
         .subscribe({
           next: () => {
             recommendation.isCompleted = true; 
-            console.log(`Recommendation ${recommendation.id} marked as completed.`);
           },
           error: (err) => console.error("Error updating recommendation:", err)
         });

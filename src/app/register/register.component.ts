@@ -42,7 +42,6 @@ export class RegisterComponent  implements OnInit {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      console.log('Register Form Data:', this.registerForm.value);
       this.snackBar.open('Registration Successful!', 'Close', { duration: 3000 });
     } else {
       this.snackBar.open('Please fill in all fields correctly!', 'Close', { duration: 3000 });

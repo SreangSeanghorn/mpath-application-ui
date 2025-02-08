@@ -26,7 +26,6 @@ export class AuthService {
         this.isAuthenticated$ = new BehaviorSubject<boolean>(this.isAuthenticated());
     }
 
-    // ✅ Login Function
     login(email: string, password: string): Observable<LoginResponse> {
         return this.http.post<BaseAPIResponse<LoginResponse>>(
             `${this.API_URL}/login`,
@@ -34,7 +33,6 @@ export class AuthService {
             { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
         ).pipe(
             tap(response => {
-                console.log("🔹 Login Response:", response);
                 if (response.data.accessToken && response.data.refreshToken) {
                     this.storeTokens(response.data.accessToken, response.data.refreshToken);
                     this.isAuthenticated$.next(true);
@@ -48,16 +46,12 @@ export class AuthService {
                 });
             }),
             catchError(error => {
-                console.error("❌ Login Error:", error);
                 return throwError(() => error);
             })
         );
     }
 
     private storeTokens(accessToken: string, refreshToken: string) {
-        console.log("🔹 Storing Tokens...");
-        console.log("🔹 Access Token:", accessToken);
-        console.log("🔹 Refresh Token:", refreshToken);
         this.cookieService.set(this.tokenKey, accessToken, 1, '/', '', true, 'Strict');
         this.cookieService.set(this.refreshTokenKey, refreshToken, 7, '/', '', true, 'Strict');
     }
@@ -71,10 +65,8 @@ export class AuthService {
     }
 
     refreshToken(): Observable<string> {
-        console.log("🔄 Refreshing Token...");
         const refreshToken = this.getRefreshToken();
         if (!refreshToken) {
-            console.error("❌ No Refresh Token Available. Logging Out...");
             this.logout();
             return throwError(() => new Error("No Refresh Token"));
         }
@@ -85,7 +77,6 @@ export class AuthService {
             { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
         ).pipe(
             tap(response => {
-                console.log("🔄 New Token Received:", response.data.accessToken);
                 if (response.data.accessToken && response.data.refreshToken) {
                     this.storeTokens(response.data.accessToken, response.data.refreshToken);
                 }
@@ -95,14 +86,12 @@ export class AuthService {
                 observer.complete();
             })),
             catchError(error => {
-                console.error("❌ Refresh Token Failed. Logging Out...");
                 this.logout();
                 return throwError(() => error);
             })
         );
     }
     logout(): void {
-        console.log("🔹 Logging Out...");
         this.cookieService.delete(this.tokenKey);
         this.cookieService.delete(this.refreshTokenKey);
         this.isAuthenticated$.next(false);

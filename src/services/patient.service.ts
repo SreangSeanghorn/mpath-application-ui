@@ -14,10 +14,8 @@ export class PatientService {
   private API_URL = 'http://localhost:5063/api/patients';
   public listOfPatients: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>([]);
   public dataObserved: Observable<Patient[]> = this.listOfPatients.asObservable();
-
   public paginationOfPatients: BehaviorSubject<PaginationForPatientsList | null> = new BehaviorSubject<PaginationForPatientsList| null>(null);
   public paginationObserved: Observable<PaginationForPatientsList | null> = this.paginationOfPatients.asObservable();
-
   constructor(private http: HttpClient) {
 
     
@@ -45,14 +43,11 @@ export class PatientService {
               pageSize: response.pageSize,
               data: response.data.data
             });
-            console.log("Patients loaded successfully:", response.data);
-            console.log("Pagination data:", response.totalPage, response.pageSize, response.page);
           } else {
             console.error("Invalid API response:", response);
           }
         },
         error: (error) => {
-          console.error("Error fetching patients:", error);
           alert("Failed to load patients. Please check your API.");
         }
       });

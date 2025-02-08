@@ -32,7 +32,6 @@ export class PatientDetailComponent implements OnInit {
 
   patient!: PatientDetail;
   patients: Patient[] = [];
-  // get id from route params and get patient from service
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.patientId = params['id'];
@@ -41,7 +40,6 @@ export class PatientDetailComponent implements OnInit {
       this.patientService.getPatientById(this.patientId).subscribe({
         next: (data) => {
           this.patient = data;
-          console.log("Patient details loaded:", this.patient);
         },
         error: (err) => {
           console.error("Error fetching patient:", err);
@@ -50,7 +48,6 @@ export class PatientDetailComponent implements OnInit {
     }
 
   }
-
   goBack() {
     window.history.back();
   }

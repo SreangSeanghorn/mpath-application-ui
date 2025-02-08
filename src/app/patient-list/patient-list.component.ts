@@ -51,11 +51,9 @@ export class PatientListComponent implements OnInit {
 
   ngOnInit() {
     this.patientService.getPatients();
-    console.log("Patients list:", this.patients.length);
     this.patientService.dataObserved.subscribe((patients) => {
       if (patients && Array.isArray(patients)) {
         this.patients = patients;
-        console.log("Patients list:", this.patients.length);
         this.applyFilters();
       } else {
         console.error("Error: Patients data is not an array", patients);
@@ -79,7 +77,6 @@ export class PatientListComponent implements OnInit {
         this.currentPage * this.pageSize,
         (this.currentPage + 1) * this.pageSize
       );
-      console.log("filtered patients:",this.filteredPatients);
   }
 
   onPageChange(event: any) {

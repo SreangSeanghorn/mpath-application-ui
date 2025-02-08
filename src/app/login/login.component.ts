@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      console.log('Login Form Data:', this.loginForm.value);
       this.snackBar.open('Login Successful!', 'Close', { duration: 3000 });
     } else {
       this.snackBar.open('Invalid login credentials!', 'Close', {
@@ -57,12 +56,11 @@ export class LoginComponent implements OnInit {
     console.log('Email:', this.email);
     this.authService.login(this.email, this.password).subscribe({
       next: () => {
-        setTimeout(() => {  // Ensure token is stored before navigating
+        setTimeout(() => {  
           this.errorMessage = '';
           this.snackBar.open('Login Successful!', 'Close', { duration: 3000 });
-          console.log('🔹 Redirecting to Patients...');
           this.router.navigate(['/patients']);
-        }, 500);  // Small delay to ensure storage completes
+        }, 500); 
       },
       error: (error) => {
         this.errorMessage = 'Invalid credentials. Please try again.';
